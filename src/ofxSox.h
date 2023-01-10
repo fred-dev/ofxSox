@@ -11,6 +11,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include <regex>
 
 
 class ofxSox {

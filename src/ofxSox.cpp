@@ -14,47 +14,47 @@ void ofxSox::setup(){
     ofLogVerbose("ofxSox::setup") << "SOX path is: " + soxPath << endl;
 }
 
-ofjson ofxSox::getStatResults(string inputFile){
-    ofLogVerbose("ofxSox::getStatResults") << "For: " + inputFile << endl;
+ofJson ofxSox::getStatResults(string inputFile){
+    ofLogVerbose("ofxSox::getStatResults") << "For: " + add_single_quotes(inputFile) << endl;
 
-    return stat_output_to_json(processCommand(inputFile + "-n stat"));
+    return stat_output_to_json(processCommand(add_single_quotes(inputFile) + " -n stat"));
 }
 
 ofJson ofxSox::getStatsResults(string inputFile){
-    ofLogVerbose("ofxSox::getStatsResults") << "For: " + inputFile << endl;
+    ofLogVerbose("ofxSox::getStatsResults") << "For: " + add_single_quotes(inputFile) << endl;
 
-    return stats_output_to_json(processCommand(inputFile + "-n stats"));
+    return stats_output_to_json(processCommand(add_single_quotes(inputFile) + " -n stats"));
 }
 
 void ofxSox::normalise(string inputFile, float normaliseMax, string outputFile){
-    ofLogVerbose("ofxSox::normalise") << "For: " + inputFile << endl;
+    ofLogVerbose("ofxSox::normalise") << "For: " + add_single_quotes(inputFile) << endl;
 
-    processCommand(inputFile  + " " + outputFile  + " norm " + ofToString(normaliseMax));
+    processCommand(add_single_quotes(inputFile)  + " " + add_single_quotes(outputFile)  + " norm " + ofToString(normaliseMax));
 }
 
 void ofxSox::convertToWav(string inputFile, int bitRate, int sampleRate, string outputFile){
-    ofLogVerbose("ofxSox::convertToWav") << "Bit rate: " + ofToString(bitRate)+ " Sample rate: " ofToString(sampleRate) << endl;
+    ofLogVerbose("ofxSox::convertToWav") << "Bit rate: " + ofToString(bitRate)+ " Sample rate: " + ofToString(sampleRate) << endl;
 
-    processCommand(inputFile + " −b "+ ofToString(bitRate) + " rate " + ofToString(sampleRate) +"k");
+    processCommand(add_single_quotes(inputFile) + " −b "+ ofToString(bitRate) + " rate " + ofToString(sampleRate) +"k");
 }
 
 void ofxSox::convertToMP3(string inputFile, int bitrate, int sampleRate, string outputFile){
-    ofLogVerbose("ofxSox::convertToMP3") << "Bit rate: " + ofToString(bitRate)+ " Sample rate: " ofToString(sampleRate) << endl;
+    ofLogVerbose("ofxSox::convertToMP3") << "Bit rate: " + ofToString(bitrate) + " Sample rate: " + ofToString(sampleRate) << endl;
     
-    processCommand(inputFile + " −b "+ ofToString(bitRate) + " rate " + ofToString(sampleRate) +"k");
+    processCommand(add_single_quotes(inputFile) + " −b "+ ofToString(bitrate) + " rate " + ofToString(sampleRate) +"k");
 
 }
 
 void ofxSox::lowPass(string inputFile, float cuttoff, string outputFile){
     ofLogVerbose("ofxSox::lowPass") << "Cuttoff: " + ofToString(cuttoff) << endl;
 
-    processCommand(inputFile  + " " + outputFile  + " sinc " + ofToString(-cuttoff)+"k");
+    processCommand(add_single_quotes(inputFile)  + " " + add_single_quotes(outputFile)  + " sinc " + ofToString(-cuttoff)+"k");
 }
 
 void ofxSox::highPass(string inputFile, float cuttoff, string outputFile){
     ofLogVerbose("ofxSox::highPass") << "Cuttoff: " + ofToString(cuttoff) << endl;
 
-    processCommand(inputFile  + " " + outputFile  + " sinc " + ofToString(cuttoff)+"k");
+    processCommand(add_single_quotes(inputFile)  + " " + add_single_quotes(outputFile)  + " sinc " + ofToString(cuttoff)+"k");
 }
 
 void ofxSox::customCommand(string command){
@@ -63,7 +63,7 @@ void ofxSox::customCommand(string command){
 
 string ofxSox::processCommand(string command){
     string output;
-    output = ofSystem(soxPath + " " + command + " 2>&1|cat")
+    output = ofSystem(soxPath + " " + command + " 2>&1|cat");
     ofLogVerbose("ofxSox::processCommand") << "Output: " + output << endl;
     return output;
 }
