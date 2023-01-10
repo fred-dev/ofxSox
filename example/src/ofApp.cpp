@@ -4,7 +4,7 @@
 void ofApp::setup(){
     //ofSetLogLevel(OF_LOG_VERBOSE);
     sox.setup();
-    cout<< sox.getStatResults("/Users/fredrodrigues/Collectivism Dropbox/Fred Rodrigues/Code/OF_GITT/openFrameworks/apps/Synthetic_ornithology/synthetic_ornithology_server/public/audiofilesProcessed/1988-12-02-08-05-07-004.wav").dump() << endl;
+    cout<< sox.getStatResults("pathtoyourfile.wav").dump() << endl;
 }
 
 //--------------------------------------------------------------
