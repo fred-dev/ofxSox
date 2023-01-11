@@ -26,6 +26,16 @@ ofJson ofxSox::getStatsResults(string inputFile){
     return stats_output_to_json(processCommand(add_single_quotes(inputFile) + " -n stats"));
 }
 
+ofJson ofxSox::getAllAudioStats(string inputFile){
+    ofJson statJson;
+    
+    statJson["stat"] = getStatResults(inputFile);
+    statJson["stats"] = getStatsResults(inputFile);
+    
+    ofLogVerbose("ofxSox::getAllAudioStats")   <<"Complete stat output is: " + ofToString(statJson) << endl;
+    return statJson;
+}
+
 void ofxSox::normalise(string inputFile, float normaliseMax, string outputFile){
     ofLogVerbose("ofxSox::normalise") << "For: " + add_single_quotes(inputFile) << endl;
 
@@ -55,6 +65,9 @@ void ofxSox::highPass(string inputFile, float cuttoff, string outputFile){
     ofLogVerbose("ofxSox::highPass") << "Cuttoff: " + ofToString(cuttoff) << endl;
 
     processCommand(add_single_quotes(inputFile)  + " " + add_single_quotes(outputFile)  + " sinc " + ofToString(cuttoff)+"k");
+}
+void ofxSox::trim(string inputFile, string outputFile, float inPoint, float outPoint){
+    processCommand(inputFile + " " + outputFile + " trim " + ofToString(inPoint) + " " + ofToString(outPoint));
 }
 
 void ofxSox::customCommand(string command){

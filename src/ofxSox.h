@@ -21,11 +21,14 @@ public:
     void setup();
     ofJson getStatResults(string inputFile);
     ofJson getStatsResults(string inputFile);
+    ofJson getAllAudioStats(string inputFile);
+
     void normalise(string inputFile, float normaliseMax, string outputFile);
     void convertToWav(string inputFile, int bitRate, int sampleRate, string outputFile);
     void convertToMP3(string inputFile, int bitrate, int sampleRate, string outputFile);
     void lowPass(string inputFile, float cuttoff, string outputFile);
     void highPass(string inputFile, float cuttoff, string outputFile);
+    void trim(string inputFile, string outputFile, float inPoint, float outPoint);
     
     void customCommand(string command);
     string processCommand(string command);
