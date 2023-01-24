@@ -67,7 +67,7 @@ void ofxSox::highPass(string inputFile, float cuttoff, string outputFile){
     processCommand(add_single_quotes(inputFile)  + " " + add_single_quotes(outputFile)  + " sinc " + ofToString(cuttoff)+"k");
 }
 void ofxSox::trim(string inputFile, string outputFile, float inPoint, float outPoint){
-    processCommand(inputFile + " " + outputFile + " trim " + ofToString(inPoint) + " " + ofToString(outPoint));
+    processCommand(add_single_quotes(inputFile) + " " + add_single_quotes(outputFile) + " trim " + ofToString(inPoint) + " " + ofToString(outPoint));
 }
 
 void ofxSox::customCommand(string command){
